@@ -1,0 +1,25 @@
+ls
+ll
+ls
+cd
+ll
+ls
+exit
+ls
+cd
+ls
+ll
+ls -l
+ll
+ls
+exit
+ls
+ls
+ls
+ls
+ll
+ls
+ls
+ls
+echo $SHELL
+perl ex03.pl

@@ -1,0 +1,52 @@
+[noma@thinknoma] elisp 16:28:00 $ l
+howm/  howm-1.4.3/  redo+.el  redo+.elc  redo+.el~  sticky.el  sticky.elc
+[noma@thinknoma] elisp 16:28:12 $ less sticky.el
+[noma@thinknoma] elisp 16:28:22 $ ls
+howm/  howm-1.4.3/  redo+.el  redo+.elc  redo+.el~  sticky.el  sticky.elc
+[noma@thinknoma] elisp 16:28:23 $ 
+[noma@thinknoma] elisp 16:29:42 $ ls
+howm/  howm-1.4.3/  redo+.el  redo+.elc  redo+.el~  sticky.el  sticky.elc
+[noma@thinknoma] elisp 16:29:43 $ ls
+howm/        redo+.el   redo+.el~  sticky.elc
+howm-1.4.3/  redo+.elc  sticky.el  sticky.el~
+[noma@thinknoma] elisp 16:30:05 $ ll
+合計 40
+drwxrwxr-x 2 noma noma  4096 11月  6 21:58 howm/
+drwxrwxr-x 7 noma noma  4096 11月  6 21:58 howm-1.4.3/
+-rw-rw-r-- 1 noma noma 12293 11月  7 00:44 redo+.el
+-rw-rw-r-- 1 noma noma  4607 11月  7 00:44 redo+.elc
+-rw-rw-r-- 1 noma noma     0 11月  7 00:33 redo+.el~
+-rw-rw-r-- 1 noma noma   451 11月 20 16:29 sticky.el
+-rw-rw-r-- 1 noma noma   405 11月 20 16:27 sticky.elc
+-rw-rw-r-- 1 noma noma     0 11月 20 16:27 sticky.el~
+[noma@thinknoma] elisp 16:30:08 $ em sticky.el
+[noma@thinknoma] elisp 16:30:29 $ ls
+#sticky.el#  howm-1.4.3/  redo+.elc  sticky.el   sticky.el~
+howm/        redo+.el     redo+.el~  sticky.elc
+[noma@thinknoma] elisp 16:31:19 $ ll
+合計 44
+-rw-rw-r-- 1 noma noma  1104 11月 20 16:30 #sticky.el#
+drwxrwxr-x 2 noma noma  4096 11月  6 21:58 howm/
+drwxrwxr-x 7 noma noma  4096 11月  6 21:58 howm-1.4.3/
+-rw-rw-r-- 1 noma noma 12293 11月  7 00:44 redo+.el
+-rw-rw-r-- 1 noma noma  4607 11月  7 00:44 redo+.elc
+-rw-rw-r-- 1 noma noma     0 11月  7 00:33 redo+.el~
+-rw-rw-r-- 1 noma noma     0 11月 20 16:31 sticky.el
+-rw-rw-r-- 1 noma noma   405 11月 20 16:31 sticky.elc
+-rw-rw-r-- 1 noma noma   451 11月 20 16:29 sticky.el~
+[noma@thinknoma] elisp 16:31:20 $ rm sticky.el~
+rm: 通常ファイル 'sticky.el~' を削除しますか? y
+[noma@thinknoma] elisp 16:31:28 $ ls
+#sticky.el#  howm-1.4.3/  redo+.elc  sticky.el
+howm/        redo+.el     redo+.el~  sticky.elc
+[noma@thinknoma] elisp 16:31:29 $ ll
+合計 40
+-rw-rw-r-- 1 noma noma  1104 11月 20 16:30 #sticky.el#
+drwxrwxr-x 2 noma noma  4096 11月  6 21:58 howm/
+drwxrwxr-x 7 noma noma  4096 11月  6 21:58 howm-1.4.3/
+-rw-rw-r-- 1 noma noma 12293 11月  7 00:44 redo+.el
+-rw-rw-r-- 1 noma noma  4607 11月  7 00:44 redo+.elc
+-rw-rw-r-- 1 noma noma     0 11月  7 00:33 redo+.el~
+-rw-rw-r-- 1 noma noma     0 11月 20 16:31 sticky.el
+-rw-rw-r-- 1 noma noma   405 11月 20 16:31 sticky.elc
+[noma@thinknoma] elisp 16:31:30 $ 

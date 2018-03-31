@@ -1,0 +1,21 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use CGI;
+
+my $q=CGI->new;
+print $q->header;
+
+my $content = <<"EOS";
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+    <h1>Hello World!</h1>
+</body>
+</html>
+EOS
+
+print $content;
