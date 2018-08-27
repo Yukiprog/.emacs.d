@@ -159,4 +159,18 @@
 ;; (setq mf-max-width 1600)
 ;;(add-hook 'window-setup-hook 'maximize-frame nil)
 
+;;neotree ディレクトリーツリーを表示
+(global-set-key [f8] 'neotree-toggle)
+;; 隠しファイルをデフォルトで表示
+(setq neo-show-hidden-files t)
+;; neotree ウィンドウを表示する毎に current file のあるディレクトリを表示する
+(setq neo-smart-open t)
 
+;;Mewの設定
+(autoload 'mew "mew" nil t)
+(autoload 'mew-send "mew" nil t)
+(setq mew-fcc "+outbox") ; 送信メールを保存
+(setq exec-path (cons "/usr/bin" exec-path))
+
+;;molokai
+(load-theme 'molokai t)
