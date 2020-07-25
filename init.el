@@ -1,9 +1,18 @@
 ;;パッケージ管理の初期化
 (require 'package)
-(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+;;(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+;;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+;;(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(setq package-archives
+      '(
+	("gnu" . "http://elpa.gnu.org/packages/")
+	("melpa" . "http://melpa.org/packages/")
+	("org" . "http://orgmode.org/elpa/")
+	))
+
+
 (package-initialize)
+
 
 ;;背景色と文字色を変更
 (set-background-color "black")
@@ -21,6 +30,7 @@
 
 ;;ファイルサイズを表示
 (size-indication-mode t)
+
 ;;時計を表示(好みに応じてフォーマットを変更可能)
 ;;(setq display-time-day-and-date t)
 (setq display-time-24hr-format t)
@@ -33,8 +43,14 @@
 (setq show-paren-delay 0)
 (show-paren-mode t)
 
-;;TABの無効化
-(setq-default indent-tabs-mode nil)
+;;TABの無効化とインデント幅を4にする
+(setq-default tab-width 4 indent-tabs-mode nil)
+
+ ;;自動インデントを実施する
+(global-set-key "\C-m" 'newline-and-indent)
+
+;;クリップボードを他のアプリと共有
+(setq x-select-enable-clipboard t)
 
 ;;redo+の設定
 (when (require 'redo+ nil t)
@@ -59,8 +75,10 @@
 
 ;;neotree ディレクトリーツリーを表示
 (global-set-key [f8] 'neotree-toggle)
+
 ;; 隠しファイルをデフォルトで表示
 (setq neo-show-hidden-files t)
+
 ;; neotree ウィンドウを表示する毎に current file のあるディレクトリを表示する
 (setq neo-smart-open t)
 (custom-set-variables
@@ -68,7 +86,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (neotree))))
+ '(package-selected-packages
+   (quote
+    (company-lsp lsp-ui ## flycheck use-package lsp-mode lsp-java neotree))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -80,3 +100,7 @@
 (setq make-backup-files nil)
 ;;; .#* とかのバックアップファイルを作らない
 (setq auto-save-default nil)
+
+;;lsp
+(require 'lsp-java)
+(add-hook 'java-mode-hook #'lsp)
