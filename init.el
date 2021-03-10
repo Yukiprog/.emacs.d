@@ -44,7 +44,7 @@
 (show-paren-mode t)
 
 ;;TABの無効化とインデント幅を4にする
-(setq-default tab-width 4 indent-tabs-mode nil)
+(setq-default c-basic-offset 4 tab-width 4 indent-tabs-mode nil)
 
  ;;自動インデントを実施する
 (global-set-key "\C-m" 'newline-and-indent)
@@ -88,7 +88,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (company-lsp lsp-ui ## flycheck use-package lsp-mode lsp-java neotree))))
+    (docker docker-compose-mode docker-tramp dockerfile-mode php-mode rainbow-delimiters mozc company company-lsp lsp-ui ## flycheck use-package lsp-mode lsp-java neotree))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -101,6 +101,56 @@
 ;;; .#* とかのバックアップファイルを作らない
 (setq auto-save-default nil)
 
-;;lsp
-(require 'lsp-java)
-(add-hook 'java-mode-hook #'lsp)
+;;command-log-mode
+(require 'command-log-mode)
+
+;; 警告音もフラッシュも全て無効(警告音が完全に鳴らなくなるので注意)
+(setq ring-bell-function 'ignore)
+
+;;company
+(require 'company)
+(global-company-mode) ; 全バッファで有効にする
+(global-set-key (kbd "C-f") 'company-complete)
+(setq company-idle-delay 0) ; デフォルトは0.5
+(setq company-minimum-prefix-length 2) ; デフォルトは4
+(setq company-selection-wrap-around t) ; 候補の一番下でさらに下に行こうとすると一番上に戻る
+
+;;; mozc
+(require 'mozc)                                 ; mozcの読み込み
+(set-language-environment "Japanese")           ; 言語環境を"japanese"に
+(setq default-input-method "japanese-mozc")     ; IMEをjapanes-mozcに
+(prefer-coding-system 'utf-8)                   ; デフォルトの文字コードをUTF-8に
+(global-set-key (kbd "C-/") 'toggle-input-method)
+
+;; rainbow-delimiters を使うための設定
+(require 'rainbow-delimiters)
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+
+;; 括弧の色を強調する設定
+(require 'cl-lib)
+(require 'color)
+(defun rainbow-delimiters-using-stronger-colors ()
+  (interactive)
+  (cl-loop
+   for index from 1 to rainbow-delimiters-max-face-count
+   do
+   (let ((face (intern (format "rainbow-delimiters-depth-%d-face" index))))
+    (cl-callf color-saturate-name (face-foreground face) 30))))
+(add-hook 'emacs-startup-hook 'rainbow-delimiters-using-stronger-colors)
+
+;; php-mode
+(require 'php-mode)
+
+;;docker用
+(require 'docker)
+
+;;dockerfileの編集用
+(require 'dockerfile-mode)
+(add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
+
+;;docker-composeファイル編集用
+(require 'docker-compose-mode)
+
+;;Trampを使用してコンテナ内に入れる。以下はコンテナIDではなく名前でアクセス出来るようにする設定
+(require 'docker-tramp-compat)
+(set-variable 'docker-tramp-use-names t)
