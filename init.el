@@ -88,7 +88,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (docker docker-compose-mode docker-tramp dockerfile-mode php-mode rainbow-delimiters mozc company company-lsp lsp-ui ## flycheck use-package lsp-mode lsp-java neotree))))
+    (ess julia-mode ac-php company-php docker docker-compose-mode docker-tramp dockerfile-mode php-mode rainbow-delimiters mozc company company-lsp lsp-ui ## flycheck use-package lsp-mode lsp-java neotree))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -154,3 +154,10 @@
 ;;Trampを使用してコンテナ内に入れる。以下はコンテナIDではなく名前でアクセス出来るようにする設定
 (require 'docker-tramp-compat)
 (set-variable 'docker-tramp-use-names t)
+
+;;Juliaモード
+(add-to-list 'load-path "path-to-julia-mode")
+(require 'julia-mode)
+
+;;ess
+(require 'ess-site)
