@@ -56,7 +56,7 @@
 (when (require 'redo+ nil t)
   (global-set-key (kbd "C-.") 'redo))
 
-;;メニューバー、ツールバー、スクロールバーを消去
+;;メニューバー、ツールバー有り、スクロールバー無し
 (menu-bar-mode t)
 (tool-bar-mode t)
 (scroll-bar-mode 0)
@@ -161,3 +161,34 @@
 
 ;;ess
 (require 'ess-site)
+
+;;elpy関連
+;;(defvar myPackages
+;;'(better-defaults
+;;    elpy
+;;    flycheck          ;; On the fly syntax checking
+;;    py-autopep8       ;; Run autopep8 on save
+;;    blacken           ;; Black formatting on save
+;;    material-theme
+;;    )
+;;  )
+;;(mapc #'(lambda (package)
+;;      (unless (package-installed-p package)
+;;        (package-install package)))
+;;      myPackages)
+
+;;モジュールアクティベート
+;;(load-theme 'material t)
+
+;; elpy
+;;(elpy-enable)
+;;(setq elpy-rpc-virtualenv-path 'current)
+
+;; Flycheck
+;;(when (require 'flycheck nil t)
+;;  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+;;  (add-hook 'elpy-mode-hook 'flycheck-mode))
+
+;; autopep8
+;;(require 'py-autopep8)
+;;(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)

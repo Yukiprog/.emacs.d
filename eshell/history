@@ -1,0 +1,17 @@
+ls 
+ls
+which perl
+ls
+ls
+(buffer-name)
+ls
+cd Downloads
+ls
+cd ngrok
+cd ../
+ls
+c
+cd .emacs
+cd .emacs.d/
+ls
+ls
