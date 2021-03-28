@@ -14,9 +14,9 @@
 (package-initialize)
 
 
-;;背景色と文字色を変更
-(set-background-color "black")
-(set-foreground-color "#ffffff")
+;;背景色と文字色を変更 material-themeに切り替えたため
+;;(set-background-color "black")
+;;(set-foreground-color "#ffffff")
 
 ;;C-tでウィンドウを切り替える。初期値はtranspose-chars
 (define-key global-map (kbd "C-t") 'other-window)
@@ -88,7 +88,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (ess julia-mode ac-php company-php docker docker-compose-mode docker-tramp dockerfile-mode php-mode rainbow-delimiters mozc company company-lsp lsp-ui ## flycheck use-package lsp-mode lsp-java neotree))))
+    (php-mode ac-php company-php docker docker-compose-mode docker-tramp dockerfile-mode rainbow-delimiters mozc company company-lsp lsp-ui ## flycheck use-package lsp-mode lsp-java neotree))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -101,7 +101,7 @@
 ;;; .#* とかのバックアップファイルを作らない
 (setq auto-save-default nil)
 
-;;command-log-mode
+;;command-log-mode C-c o
 (require 'command-log-mode)
 
 ;; 警告音もフラッシュも全て無効(警告音が完全に鳴らなくなるので注意)
@@ -110,7 +110,7 @@
 ;;company
 (require 'company)
 (global-company-mode) ; 全バッファで有効にする
-(global-set-key (kbd "C-f") 'company-complete)
+;;(global-set-key (kbd "C-f") 'company-complete)
 (setq company-idle-delay 0) ; デフォルトは0.5
 (setq company-minimum-prefix-length 2) ; デフォルトは4
 (setq company-selection-wrap-around t) ; 候補の一番下でさらに下に行こうとすると一番上に戻る
@@ -138,9 +138,6 @@
     (cl-callf color-saturate-name (face-foreground face) 30))))
 (add-hook 'emacs-startup-hook 'rainbow-delimiters-using-stronger-colors)
 
-;; php-mode
-(require 'php-mode)
-
 ;;docker用
 (require 'docker)
 
@@ -155,40 +152,49 @@
 (require 'docker-tramp-compat)
 (set-variable 'docker-tramp-use-names t)
 
-;;Juliaモード
-(add-to-list 'load-path "path-to-julia-mode")
-(require 'julia-mode)
+;; php-mode
+;;(require 'php-mode)
 
-;;ess
-(require 'ess-site)
+;;elpy
+(defvar myPackages
+  '(better-defaults
+    elpy
+    flycheck          ;; On the fly syntax checking
+    py-autopep8       ;; Run autopep8 on save
+    blacken           ;; Black formatting on save
+    material-theme
+    )
+  )
+(mapc #'(lambda (package)
+      (unless (package-installed-p package)
+        (package-install package)))
+      myPackages)
 
-;;elpy関連
-;;(defvar myPackages
-;;'(better-defaults
-;;    elpy
-;;    flycheck          ;; On the fly syntax checking
-;;    py-autopep8       ;; Run autopep8 on save
-;;    blacken           ;; Black formatting on save
-;;    material-theme
-;;    )
-;;  )
-;;(mapc #'(lambda (package)
-;;      (unless (package-installed-p package)
-;;        (package-install package)))
-;;      myPackages)
-
-;;モジュールアクティベート
-;;(load-theme 'material t)
+(load-theme 'material t)
 
 ;; elpy
-;;(elpy-enable)
-;;(setq elpy-rpc-virtualenv-path 'current)
+(elpy-enable)
+(setq elpy-rpc-virtualenv-path 'current)
 
 ;; Flycheck
-;;(when (require 'flycheck nil t)
-;;  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-;;  (add-hook 'elpy-mode-hook 'flycheck-mode))
+(when (require 'flycheck nil t)
+  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+  (add-hook 'elpy-mode-hook 'flycheck-mode))
 
 ;; autopep8
-;;(require 'py-autopep8)
-;;(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+(require 'py-autopep8)
+(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+
+(defun php-company-hook ()
+  (require 'company-php)
+  (company-mode t)
+  (ac-php-core-eldoc-setup) ;; enable eldoc
+  (make-local-variable 'company-backends)
+  (add-to-list 'company-backends 'company-ac-php-backend)
+  ; 定義にジャンプ
+  (define-key php-mode-map  (kbd "M-.") 'ac-php-find-symbol-at-point)
+  ; ジャンプ先から戻る
+  (define-key php-mode-map  (kbd "M-,") 'ac-php-location-stack-back))
+
+
+(add-hook 'php-mode-hook 'php-company-hook)

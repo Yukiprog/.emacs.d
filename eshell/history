@@ -15,3 +15,101 @@ cd .emacs
 cd .emacs.d/
 ls
 ls
+ls
+echo $SHELL
+vi
+ls
+ls
+pyenv install list
+pyenv install --list
+pyenv versions
+ls
+cdd
+cd
+ls
+cd atcoder/abc/190/
+ls
+emacs a.out
+ls
+ls
+ls 
+ls 
+ls 
+find-file .emacs.d/init.el 
+ls
+cd atcoder/abc/
+mkdir 197
+cd 197/
+ls
+ls -l
+php a.php 
+php a.php 
+php a.php 
+php a.php 
+php a.php 
+php a.php 
+ls
+ls
+ls
+cd
+ls
+ls
+ls
+cd react
+ls
+find-file ~/.emacs.d/init.el
+ls
+ls
+cd
+ls
+cd welcome
+cd web
+ls
+ls
+ls
+sudo apt update
+xeyes 
+xeyes 
+find-file .emacs.d/init.el 
+sudo apt upgrade
+7Progress: [ 94%] [#########################################################################################################################################################################...........] 87Progress: [ 97%] [##############################################################################################################################################################################......] 8Processing triggers for man-db (2.9.1-1) ...
+ls
+ls
+ls
+ls
+ls
+ls
+cd web/sample/
+ls
+find-file app/Models/
+ls
+cd
+ls
+cd python
+ls
+cd vpython/
+cd test/
+ls
+lambdala
+la
+ls -a
+cd
+ls
+cd web
+ls
+cd sample/
+ls
+cd ../
+ls
+mkdir php
+cd web
+cd php
+ls
+ls
+mkdir login
+cd login
+pwd
+ls
+find-file login.php
+ls
+touch .ac-php-conf.json
