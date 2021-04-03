@@ -88,7 +88,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (php-mode ac-php company-php docker docker-compose-mode docker-tramp dockerfile-mode rainbow-delimiters mozc company company-lsp lsp-ui ## flycheck use-package lsp-mode lsp-java neotree))))
+    (nyan-mode spaceline php-mode ac-php company-php docker docker-compose-mode docker-tramp dockerfile-mode rainbow-delimiters mozc company company-lsp lsp-ui ## flycheck use-package lsp-mode lsp-java neotree))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -185,6 +185,7 @@
 (require 'py-autopep8)
 (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
 
+;;phpの補完、定義ジャンプ
 (defun php-company-hook ()
   (require 'company-php)
   (company-mode t)
@@ -195,6 +196,11 @@
   (define-key php-mode-map  (kbd "M-.") 'ac-php-find-symbol-at-point)
   ; ジャンプ先から戻る
   (define-key php-mode-map  (kbd "M-,") 'ac-php-location-stack-back))
-
-
 (add-hook 'php-mode-hook 'php-company-hook)
+
+;;modelineをいい感じに
+(require 'spaceline-config)
+(spaceline-spacemacs-theme)
+
+;;nyan-mode 猫ちゃん
+(nyan-mode t)
