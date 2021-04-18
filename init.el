@@ -1,4 +1,4 @@
-;;パッケージ管理の初期化
+;パッケージ管理の初期化
 (require 'package)
 ;;(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 ;;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
@@ -88,7 +88,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (nyan-mode spaceline php-mode ac-php company-php docker docker-compose-mode docker-tramp dockerfile-mode rainbow-delimiters mozc company company-lsp lsp-ui ## flycheck use-package lsp-mode lsp-java neotree))))
+    (ivy counsel nyan-mode spaceline php-mode ac-php company-php docker docker-compose-mode docker-tramp dockerfile-mode rainbow-delimiters mozc company company-lsp lsp-ui ## flycheck use-package lsp-mode lsp-java neotree))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -101,6 +101,9 @@
 ;;; .#* とかのバックアップファイルを作らない
 (setq auto-save-default nil)
 
+;;ペースト時選択範囲を上書きするよ
+(delete-selection-mode t)
+
 ;;command-log-mode C-c o
 (require 'command-log-mode)
 
@@ -108,19 +111,19 @@
 (setq ring-bell-function 'ignore)
 
 ;;company
-(require 'company)
-(global-company-mode) ; 全バッファで有効にする
+;;(require 'company)
+;;(global-company-mode) ; 全バッファで有効にする
 ;;(global-set-key (kbd "C-f") 'company-complete)
-(setq company-idle-delay 0) ; デフォルトは0.5
-(setq company-minimum-prefix-length 2) ; デフォルトは4
-(setq company-selection-wrap-around t) ; 候補の一番下でさらに下に行こうとすると一番上に戻る
+;;(setq company-idle-delay 0) ; デフォルトは0.5
+;;(setq company-minimum-prefix-length 2) ; デフォルトは4
+;;(setq company-selection-wrap-around t) ; 候補の一番下でさらに下に行こうとすると一番上に戻る
 
 ;;; mozc
 (require 'mozc)                                 ; mozcの読み込み
 (set-language-environment "Japanese")           ; 言語環境を"japanese"に
 (setq default-input-method "japanese-mozc")     ; IMEをjapanes-mozcに
 (prefer-coding-system 'utf-8)                   ; デフォルトの文字コードをUTF-8に
-(global-set-key (kbd "C-/") 'toggle-input-method)
+(global-set-key [?\S-\ ] 'toggle-input-method) ;; shift + space
 
 ;; rainbow-delimiters を使うための設定
 (require 'rainbow-delimiters)
@@ -204,3 +207,21 @@
 
 ;;nyan-mode 猫ちゃん
 (nyan-mode t)
+
+;; ivy設定
+(require 'ivy)
+(ivy-mode 1)
+(setq ivy-use-virtual-buffers t)
+(setq enable-recursive-minibuffers t)
+(setq ivy-height 30) ;; minibufferのサイズを拡大！（重要）
+(setq ivy-extra-directories nil)
+(setq ivy-re-builders-alist
+      '((t . ivy--regex-plus)))
+
+;; counsel設定
+(global-set-key (kbd "M-x") 'counsel-M-x)
+(global-set-key (kbd "C-x C-f") 'counsel-find-file) ;; find-fileもcounsel任せ！
+(setq counsel-find-file-ignore-regexp (regexp-opt '("./" "../")))
+
+(global-set-key "\C-s" 'swiper)
+(setq swiper-include-line-number-in-search t) ;; line-numberでも検索可能
