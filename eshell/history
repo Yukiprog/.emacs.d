@@ -1,33 +1,3 @@
-ls 
-ls
-which perl
-ls
-ls
-(buffer-name)
-ls
-cd Downloads
-ls
-cd ngrok
-cd ../
-ls
-c
-cd .emacs
-cd .emacs.d/
-ls
-ls
-ls
-echo $SHELL
-vi
-ls
-ls
-pyenv install list
-pyenv install --list
-pyenv versions
-ls
-cdd
-cd
-ls
-cd atcoder/abc/190/
 ls
 emacs a.out
 ls
@@ -113,3 +83,46 @@ ls
 find-file login.php
 ls
 touch .ac-php-conf.json
+ls
+cd ../
+ls
+rm -r nginx.conf/
+cd ../
+ls
+ll
+ls -l
+chown yuki:yuki *
+sudo chown yuki:yuki *
+ls
+ll
+ls -
+ls -l
+rm nginx/nginx.conf/
+rm -r nginx/nginx.conf/
+ks
+ls
+ll
+ls -l
+ls
+ls
+ls
+ls
+cd
+ls
+more a.php 
+ls
+ls
+cd docker_php/
+ls
+cd www
+ls
+ls
+gcc a.c 
+gcc a.c 
+./a.out 
+ls
+rm a.out a.c 
+ls
+cd
+ls
+exit

@@ -88,7 +88,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (ivy counsel nyan-mode spaceline php-mode ac-php company-php docker docker-compose-mode docker-tramp dockerfile-mode rainbow-delimiters mozc company company-lsp lsp-ui ## flycheck use-package lsp-mode lsp-java neotree))))
+    (ivy counsel nyan-mode spaceline php-mode ac-php company-php docker docker-compose-mode docker-tramp dockerfile-mode rainbow-delimiters mozc company company-lsp lsp-ui ## use-package lsp-mode lsp-java neotree))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -158,13 +158,9 @@
 ;; php-mode
 ;;(require 'php-mode)
 
-;;elpy
+;;material-theme
 (defvar myPackages
-  '(better-defaults
-    elpy
-    flycheck          ;; On the fly syntax checking
-    py-autopep8       ;; Run autopep8 on save
-    blacken           ;; Black formatting on save
+  '(
     material-theme
     )
   )
@@ -174,19 +170,6 @@
       myPackages)
 
 (load-theme 'material t)
-
-;; elpy
-(elpy-enable)
-(setq elpy-rpc-virtualenv-path 'current)
-
-;; Flycheck
-(when (require 'flycheck nil t)
-  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-  (add-hook 'elpy-mode-hook 'flycheck-mode))
-
-;; autopep8
-(require 'py-autopep8)
-(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
 
 ;;phpの補完、定義ジャンプ
 (defun php-company-hook ()
