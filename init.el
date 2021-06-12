@@ -54,9 +54,10 @@
 ;;クリップボードを他のアプリと共有
 (setq x-select-enable-clipboard t)
 
-;;redo+の設定
-(when (require 'redo+ nil t)
-  (global-set-key (kbd "C-.") 'redo))
+;;undo-tree+の設定
+(require 'undo-tree)
+(global-undo-tree-mode t)
+(global-set-key (kbd "C-.") 'undo-tree-redo)
 
 ;;メニューバー、ツールバー有り、スクロールバー無し
 (menu-bar-mode t)
@@ -90,7 +91,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (zotelo ivy counsel nyan-mode spaceline php-mode ac-php company-php docker docker-compose-mode docker-tramp dockerfile-mode rainbow-delimiters mozc company company-lsp lsp-ui ## use-package lsp-mode lsp-java neotree))))
+    (undo-tree zotelo ivy counsel nyan-mode spaceline php-mode ac-php company-php docker docker-compose-mode docker-tramp dockerfile-mode rainbow-delimiters mozc company company-lsp lsp-ui ## use-package lsp-mode lsp-java neotree))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -217,3 +218,6 @@
   (indent-region (region-beginning)(region-end))
   (point-undo))
 (global-set-key (kbd  "C-x C-]") 'all-indent)
+
+
+
