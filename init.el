@@ -1,18 +1,20 @@
-;パッケージ管理の初期化
+;;パッケージ管理の初期化
 (require 'package)
 ;;(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 ;;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 ;;(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (setq package-archives
       '(
-	("gnu" . "http://elpa.gnu.org/packages/")
-	("melpa" . "http://melpa.org/packages/")
-	("org" . "http://orgmode.org/elpa/")
-	))
+        ("gnu" . "http://elpa.gnu.org/packages/")
+        ("melpa" . "http://melpa.org/packages/")
+        ("org" . "http://orgmode.org/elpa/")
+        ))
 
 
 (package-initialize)
 
+;;野良elispのためのディレクトリを読み込む
+(add-to-list 'load-path "~/.emacs.d/elisp")
 
 ;;背景色と文字色を変更 material-themeに切り替えたため
 ;;(set-background-color "black")
@@ -46,7 +48,7 @@
 ;;TABの無効化とインデント幅を4にする
 (setq-default c-basic-offset 4 tab-width 4 indent-tabs-mode nil)
 
- ;;自動インデントを実施する
+;;自動インデントを実施する
 (global-set-key "\C-m" 'newline-and-indent)
 
 ;;クリップボードを他のアプリと共有
@@ -88,7 +90,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (ivy counsel nyan-mode spaceline php-mode ac-php company-php docker docker-compose-mode docker-tramp dockerfile-mode rainbow-delimiters mozc company company-lsp lsp-ui ## use-package lsp-mode lsp-java neotree))))
+    (zotelo ivy counsel nyan-mode spaceline php-mode ac-php company-php docker docker-compose-mode docker-tramp dockerfile-mode rainbow-delimiters mozc company company-lsp lsp-ui ## use-package lsp-mode lsp-java neotree))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -123,7 +125,7 @@
 (set-language-environment "Japanese")           ; 言語環境を"japanese"に
 (setq default-input-method "japanese-mozc")     ; IMEをjapanes-mozcに
 (prefer-coding-system 'utf-8)                   ; デフォルトの文字コードをUTF-8に
-(global-set-key [?\S-\ ] 'toggle-input-method) ;; shift + space
+;;(global-set-key [?\S-\ ] 'toggle-input-method) ;; Ctrl + \
 
 ;; rainbow-delimiters を使うための設定
 (require 'rainbow-delimiters)
@@ -138,7 +140,7 @@
    for index from 1 to rainbow-delimiters-max-face-count
    do
    (let ((face (intern (format "rainbow-delimiters-depth-%d-face" index))))
-    (cl-callf color-saturate-name (face-foreground face) 30))))
+     (cl-callf color-saturate-name (face-foreground face) 30))))
 (add-hook 'emacs-startup-hook 'rainbow-delimiters-using-stronger-colors)
 
 ;;docker用
@@ -155,9 +157,6 @@
 (require 'docker-tramp-compat)
 (set-variable 'docker-tramp-use-names t)
 
-;; php-mode
-;;(require 'php-mode)
-
 ;;material-theme
 (defvar myPackages
   '(
@@ -165,10 +164,9 @@
     )
   )
 (mapc #'(lambda (package)
-      (unless (package-installed-p package)
-        (package-install package)))
+          (unless (package-installed-p package)
+            (package-install package)))
       myPackages)
-
 (load-theme 'material t)
 
 ;;phpの補完、定義ジャンプ
@@ -178,9 +176,9 @@
   (ac-php-core-eldoc-setup) ;; enable eldoc
   (make-local-variable 'company-backends)
   (add-to-list 'company-backends 'company-ac-php-backend)
-  ; 定義にジャンプ
+  ;; 定義にジャンプ
   (define-key php-mode-map  (kbd "M-.") 'ac-php-find-symbol-at-point)
-  ; ジャンプ先から戻る
+  ;; ジャンプ先から戻る
   (define-key php-mode-map  (kbd "M-,") 'ac-php-location-stack-back))
 (add-hook 'php-mode-hook 'php-company-hook)
 
@@ -196,7 +194,7 @@
 (ivy-mode 1)
 (setq ivy-use-virtual-buffers t)
 (setq enable-recursive-minibuffers t)
-(setq ivy-height 30) ;; minibufferのサイズを拡大！（重要）
+(setq ivy-height 30) ;; minibufferのサイズを拡大
 (setq ivy-extra-directories nil)
 (setq ivy-re-builders-alist
       '((t . ivy--regex-plus)))
@@ -206,5 +204,17 @@
 (global-set-key (kbd "C-x C-f") 'counsel-find-file) ;; find-fileもcounsel任せ！
 (setq counsel-find-file-ignore-regexp (regexp-opt '("./" "../")))
 
+;; swiper設定
 (global-set-key "\C-s" 'swiper)
 (setq swiper-include-line-number-in-search t) ;; line-numberでも検索可能
+
+;; カーソルをずらさずに全体のインデントを実施するための関数
+;; 野良elのpoint-undoを追加している
+(require 'point-undo)
+(defun all-indent ()
+  (interactive)
+  (mark-whole-buffer)
+  (indent-region (region-beginning)(region-end))
+  (point-undo))
+
+(global-set-key (kbd  "C-x C-]") 'all-indent)
