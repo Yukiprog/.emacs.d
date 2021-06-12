@@ -1,0 +1,128 @@
+php a.php 
+php a.php 
+php a.php 
+php a.php 
+php a.php 
+ls
+ls
+ls
+cd
+ls
+ls
+ls
+cd react
+ls
+find-file ~/.emacs.d/init.el
+ls
+ls
+cd
+ls
+cd welcome
+cd web
+ls
+ls
+ls
+sudo apt update
+xeyes 
+xeyes 
+find-file .emacs.d/init.el 
+sudo apt upgrade
+7Progress: [ 94%] [#########################################################################################################################################################################...........] 87Progress: [ 97%] [##############################################################################################################################################################################......] 8Processing triggers for man-db (2.9.1-1) ...
+ls
+ls
+ls
+ls
+ls
+ls
+cd web/sample/
+ls
+find-file app/Models/
+ls
+cd
+ls
+cd python
+ls
+cd vpython/
+cd test/
+ls
+lambdala
+la
+ls -a
+cd
+ls
+cd web
+ls
+cd sample/
+ls
+cd ../
+ls
+mkdir php
+cd web
+cd php
+ls
+ls
+mkdir login
+cd login
+pwd
+ls
+find-file login.php
+ls
+touch .ac-php-conf.json
+ls
+cd ../
+ls
+rm -r nginx.conf/
+cd ../
+ls
+ll
+ls -l
+chown yuki:yuki *
+sudo chown yuki:yuki *
+ls
+ll
+ls -
+ls -l
+rm nginx/nginx.conf/
+rm -r nginx/nginx.conf/
+ks
+ls
+ll
+ls -l
+ls
+ls
+ls
+ls
+cd
+ls
+more a.php 
+ls
+ls
+cd docker_php/
+ls
+cd www
+ls
+ls
+gcc a.c 
+gcc a.c 
+./a.out 
+ls
+rm a.out a.c 
+ls
+cd
+ls
+exit
+;s
+ls
+echo $PATH
+echo $PATH | grep local
+echo $PATH | grep /usr/local
+ls
+ls
+ls
+find-file 
+cd
+ls
+cd docker_php/
+ls
+cd www
+exit
